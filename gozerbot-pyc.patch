@@ -1,0 +1,65 @@
+--- gozerbot-0.8.1.1/gozerbot/__init__.py~	2008-06-17 00:09:09.000000000 +0300
++++ gozerbot-0.8.1.1/gozerbot/__init__.py	2008-11-05 23:10:18.914266709 +0200
+@@ -13,8 +13,8 @@
+ __all__ = []
+ 
+ for i in os.listdir(f):
+-    if i.endswith('.py'):
+-        __all__.append(i[:-3])
++    if i.endswith('.pyc'):
++        __all__.append(i[:-4])
+ __all__.remove('__init__')
+ 
+ del f, tail
+--- gozerbot-0.8.1.1/gozerbot/generic.py	2008-06-17 00:09:09.000000000 +0300
++++ gozerbot-0.8.1.1-pyc/gozerbot/generic.py	2008-11-05 23:18:15.717742141 +0200
+@@ -924,8 +924,8 @@
+ def plugnames(dirname):
+     """ get all plugnames in dir """
+     result = []
+-    for i in glob.glob(dirname + os.sep + '*.py'):
+-        result.append(i.split(os.sep)[-1][:-3])
++    for i in glob.glob(dirname + os.sep + '*.pyc'):
++        result.append(i.split(os.sep)[-1][:-4])
+     try:
+         result.remove('__init__')
+     except:
+--- gozerbot-0.8.1.1/gozerplugs/dbplugs/__init__.py	2008-06-17 00:09:09.000000000 +0300
++++ gozerbot-0.8.1.1-pyc/gozerplugs/dbplugs/__init__.py	2008-11-05 23:18:22.150112802 +0200
+@@ -12,8 +12,8 @@
+ __all__ = []
+ 
+ for i in os.listdir(f):
+-    if i.endswith('.py'):
+-        __all__.append(i[:-3])
++    if i.endswith('.pyc'):
++        __all__.append(i[:-4])
+ __all__.remove('__init__')
+ 
+ del f, tail
+--- gozerbot-0.8.1.1/gozerplugs/plugs/__init__.py	2008-06-17 00:09:09.000000000 +0300
++++ gozerbot-0.8.1.1-pyc/gozerplugs/plugs/__init__.py	2008-11-05 23:18:38.239039919 +0200
+@@ -12,8 +12,8 @@
+ __all__ = []
+ 
+ for i in os.listdir(f):
+-    if i.endswith('.py'):
+-        __all__.append(i[:-3])
++    if i.endswith('.pyc'):
++        __all__.append(i[:-4])
+     elif os.path.isdir(f + os.sep + i):
+         __all__.append(i)
+ __all__.remove('__init__')
+--- gozerbot-0.8.1.1/gozerplugs/web/__init__.py	2008-06-17 00:09:09.000000000 +0300
++++ gozerbot-0.8.1.1-pyc/gozerplugs/web/__init__.py	2008-11-05 23:18:27.138400250 +0200
+@@ -12,8 +12,8 @@
+ __all__ = []
+ 
+ for i in os.listdir(f):
+-    if i.endswith('.py'):
+-        __all__.append(i[:-3])
++    if i.endswith('.pyc'):
++        __all__.append(i[:-4])
+ __all__.remove('__init__')
+ 
+ del f, tail
