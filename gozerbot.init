@@ -35,7 +35,8 @@ start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gozerbot ]; then
 		msg_starting gozerbot
-		daemon /usr/bin/gozerbot
+		RC_LOGGING=no # shell version of daemon() can't do --fork and --user
+		daemon --user gozerbot --fork --chdir /var/lib/gozerbot /usr/bin/gozerbot
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gozerbot
 	else
