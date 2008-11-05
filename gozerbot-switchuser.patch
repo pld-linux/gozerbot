@@ -11,7 +11,7 @@
  vi = sys.version_info
  
  if vi[0] < 2 or (vi[0] == 2 and vi[1] < 4):
-@@ -40,10 +36,40 @@
+@@ -40,10 +36,37 @@
  parser.add_option('', '-r', type='string', default=False, dest='doresume', 
                    metavar='PATH', 
                    help="Resume the bot from the folder specified")
@@ -37,9 +37,6 @@
 +    for groupname, password, gidn, userlist in grp.getgrall():
 +        if opts.user in userlist:
 +            l.append(gidn)
-+    print l
-+    print gid
-+    print uid
 +    os.setgroups(l)
 +    os.setegid(gid);
 +    os.setuid(uid);
