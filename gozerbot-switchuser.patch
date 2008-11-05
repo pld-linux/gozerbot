@@ -1,0 +1,54 @@
+--- ./runbot	2008-11-05 23:21:59.202620626 +0200
++++ ./gozerbot	2008-11-06 00:57:23.268548962 +0200
+@@ -8,10 +8,6 @@
+ 
+ import sys, os, socket
+ 
+-if os.getuid() == 0:
+-    print "don't run the bot as root"
+-    os._exit(1)
+-
+ vi = sys.version_info
+ 
+ if vi[0] < 2 or (vi[0] == 2 and vi[1] < 4):
+@@ -40,10 +36,40 @@
+ parser.add_option('', '-r', type='string', default=False, dest='doresume', 
+                   metavar='PATH', 
+                   help="Resume the bot from the folder specified")
++parser.add_option('', '-U', type='string', default=None, dest='user',
++                  help="switch to this user when running")
+ 
+ opts, args = parser.parse_args()
+ opts.args = args
+ 
++if opts.user:
++    if not os.getuid() == 0:
++        print "can't switch user if not ran as root"
++        os._exit(1)
++
++    import pwd
++    import grp
++
++    uid = pwd.getpwnam(opts.user).pw_uid
++    gid = pwd.getpwnam(opts.user).pw_gid
++
++    os.setgid(gid);
++    l = [gid]
++    for groupname, password, gidn, userlist in grp.getgrall():
++        if opts.user in userlist:
++            l.append(gidn)
++    print l
++    print gid
++    print uid
++    os.setgroups(l)
++    os.setegid(gid);
++    os.setuid(uid);
++    os.seteuid(uid);
++
++if os.getuid() == 0:
++    print "don't run the bot as root"
++    os._exit(1)
++
+ if not opts.doascii:
+     reload(sys)
+     sys.setdefaultencoding('utf-8')

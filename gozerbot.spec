@@ -2,18 +2,18 @@
 # - initscript
 # - patch code to support output logging
 # - patch code to support daemonizing
-# - patch code to switch uid
 # - config from /etc when ran as service
 Summary:	gozerbot is the Python IRC bot and Jabber bot in one
 Name:		gozerbot
 Version:	0.8.1.1
-Release:	0.5
+Release:	0.7
 License:	BSD
 Group:		Applications/Communications
 Source0:	http://www.gozerbot.org/media/tarball/%{name}-%{version}.tar.gz
 # Source0-md5:	f94037651700737f655f28244662c5a0
 Source1:	%{name}.init
 Patch0:		%{name}-pyc.patch
+Patch1:		%{name}-switchuser.patch
 URL:		http://www.gozerbot.org/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.228
@@ -39,6 +39,7 @@ Python IRC bot and Jabber bot in one.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 %{__grep} -rl '#!/usr/bin/env python' . | xargs %{__sed} -i -e '1s,#!.*bin/env python,#!%{__python}',
 
 %build
