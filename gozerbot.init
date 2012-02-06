@@ -7,8 +7,6 @@
 # description:	Python IRC/Jabber bot
 #
 # processname:	gozerbot
-# config:
-# pidfile:
 #
 # $Id$
 
